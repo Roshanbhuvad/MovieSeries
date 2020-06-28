@@ -1,6 +1,12 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { searchMovie } from "../../actions/searchActions";
 
 export class SearchForm extends Component {
+  onChange = (e) => {
+    this.props.searchMovie(e.target.value);
+  };
+
   render() {
     return (
       <div className="jumbotron jumbotron-fluid mt-5 text-center">
@@ -27,4 +33,10 @@ export class SearchForm extends Component {
   }
 }
 
-export default SearchForm;
+//mapStateToProps is destructuring method or process
+const mapStateToProps = (state) => ({
+  text: state.movies.text,
+});
+
+export default connect(mapStateToProps, { searchMovie })(SearchForm);
+// In connect first paramter will be the function that map the state into  components props and second will be the functions or the actions that are using in component
