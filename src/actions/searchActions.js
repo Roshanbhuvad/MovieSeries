@@ -1,6 +1,8 @@
 //each action is a function
 
-import { SEARCH_MOVIE } from "./types";
+import { FETCH_MOVIES, SEARCH_MOVIE } from "./types";
+import axios from "axios";
+import { APIKey } from "../APIKey";
 
 export const searchMovie = (text) => (dispatch) => {
   // just dispatching the action type and the action payload which will make the reducer recognize the action
@@ -8,4 +10,16 @@ export const searchMovie = (text) => (dispatch) => {
     type: SEARCH_MOVIE,
     payload: text,
   });
+};
+
+export const fetchMovies = (text) => (dispatch) => {
+  axios
+    .get(`http://www.omdbapi.com/?i=tt3896198&apikey=${APIKey}&s=${text}`)
+    .then((response) =>
+      dispatch({
+        type: FETCH_MOVIES,
+        payload: response.data.Search,
+      })
+    )
+    .catch((err) => console.log(err));
 };

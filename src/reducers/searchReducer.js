@@ -3,7 +3,7 @@
    its type  depending on the type it will take a new state and setting a new state depending on the type of action
    and second paramter is payload payload is the data which is coming from the action  */
 
-import { SEARCH_MOVIE } from "../actions/types";
+import { SEARCH_MOVIE, FETCH_MOVIES } from "../actions/types";
 
 const initialState = {
   text: "",
@@ -19,6 +19,11 @@ export default function (state = initialState, action) {
         ...state,
         text: action.payload,
         loading: false,
+      };
+    case FETCH_MOVIES:
+      return {
+        ...state,
+        movies: action.payload,
       };
     default:
       return state;
