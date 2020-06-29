@@ -54,7 +54,7 @@ export class Movie extends Component {
               {movie.Plot}
               <hr />
               <a
-                href={"http://www.imdb.com/title/" + movie.imdbID}
+                href={"https://www.imdb.com/title/" + movie.imdbID}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn-primary"
