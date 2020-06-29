@@ -9,6 +9,7 @@ import Footer from "./components/layout/Footer";
 import Landing from "./components/home/Landing";
 import Movie from "./components/home/Movie";
 import store from "./store";
+import Slider from "./components/home/Slider";
 
 class App extends Component {
   render() {
@@ -19,6 +20,7 @@ class App extends Component {
             <Navbar />
             <Route exact path="/" component={Landing} />
             <Route exact path="/movie/:id" component={Movie} />
+            <Slider />
             <Footer />
           </div>
         </Router>
