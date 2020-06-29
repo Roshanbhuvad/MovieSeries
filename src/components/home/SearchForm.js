@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { searchMovie, fetchMovies } from "../../actions/searchActions";
+import {
+  searchMovie,
+  fetchMovies,
+  setLoading,
+} from "../../actions/searchActions";
 
 export class SearchForm extends Component {
   onChange = (e) => {
@@ -9,6 +13,7 @@ export class SearchForm extends Component {
   onSubmit = (e) => {
     e.preventDefault();
     this.props.fetchMovies(this.props.text);
+    this.props.setLoading();
   };
   render() {
     return (
@@ -26,8 +31,7 @@ export class SearchForm extends Component {
               onChange={this.onChange}
             />
             <button type="submit" className="btn btn-primary btn-bg mt-3">
-              {" "}
-              Search{" "}
+              Search
             </button>
           </form>
         </div>
@@ -41,7 +45,9 @@ const mapStateToProps = (state) => ({
   text: state.movies.text,
 });
 
-export default connect(mapStateToProps, { searchMovie, fetchMovies })(
-  SearchForm
-);
+export default connect(mapStateToProps, {
+  searchMovie,
+  fetchMovies,
+  setLoading,
+})(SearchForm);
 // In connect first parameter will be the function that map the state into  components props and second will be the functions or the actions that are using in component

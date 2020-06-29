@@ -1,7 +1,8 @@
 //each action is a function
 
-import { FETCH_MOVIES, SEARCH_MOVIE } from "./types";
+import { FETCH_MOVIES, SEARCH_MOVIE, FETCH_MOVIE, LOADING } from "./types";
 import axios from "axios";
+
 import { APIKey } from "../APIKey";
 
 export const searchMovie = (text) => (dispatch) => {
@@ -18,8 +19,26 @@ export const fetchMovies = (text) => (dispatch) => {
     .then((response) =>
       dispatch({
         type: FETCH_MOVIES,
-        payload: response.data.Search,
+        payload: response.data,
       })
     )
     .catch((err) => console.log(err));
+};
+
+export const fetchMovie = (id) => (dispatch) => {
+  axios
+    .get(`http://www.omdbapi.com/?i=tt3896198&apikey=${APIKey}&i=${id}`)
+    .then((response) =>
+      dispatch({
+        type: FETCH_MOVIE,
+        payload: response.data,
+      })
+    )
+    .catch((err) => console.log(err));
+};
+
+export const setLoading = () => {
+  return {
+    type: LOADING,
+  };
 };
